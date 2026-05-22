@@ -1,0 +1,19 @@
+# Првило: игнорируем всё, что создает CMake и IDE
+build/
+bin/
+lib/
+out/
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln
+*.vcxproj
+*.filters
+CMakeCache.txt
+CMakeFiles/
+CMakeSettings.json
+install_manifest.txt
+CTestTestfile.cmake
+Makefile
+cmake_install.cmake
