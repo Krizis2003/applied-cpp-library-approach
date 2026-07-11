@@ -19,6 +19,9 @@ struct TypeWrapper {
     
     // Явное приведение обратно к базовому типу
     explicit constexpr operator T() const { return value; }
+
+    // Бесплатно генерирует все 6 операторов сравнения:
+    auto operator<=>(const TypeWrapper&) const = default;
 };
 
 // Создание типов через пустые структуры-теги
