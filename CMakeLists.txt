@@ -1,11 +1,9 @@
-cmake_minimum_required(VERSION 3.10)
-project(applied_cpp_library_approach)
+cmake_minimum_required(VERSION 3.15)
+project(applied_cpp_examples CXX)
 
-# Общие настройки для всех примеров серии
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Подключаем части серии по мере готовности
-add_subdirectory(01_strong_types)
+enable_testing()
 
-# add_subdirectory(02_tag_dispatching) # Для будущих выпусков
+add_subdirectory(01_strong_types)

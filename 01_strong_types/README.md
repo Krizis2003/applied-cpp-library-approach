@@ -1,92 +1,31 @@
-# Примеры к статье «C++: Техники за пределами прикладного минимума. Сильные типы»
+# Часть 1. Сильные типы
 
-Этот репозиторий содержит компактный набор примеров, сопровождающих статью о сильных типах, шаблонных обёртках и других простых приёмах, которые позволяют аккуратно выйти за пределы «шаблонного минимализма» в прикладном C++.
+Примеры кода к первой части цикла статей на Хабре: сильные типы, шаблонный `TypeWrapper`, пользовательские литералы (UDL) и альтернативные решения (Parameter Object, `enum class`).
 
-Каждый пример — небольшая независимая программа, отражающая соответствующий фрагмент статьи.
+## Структура каталога
 
----
+- `include/type_wrapper.hpp` — компактная заголовочная реализация `TypeWrapper<T, Tag>` с поддержкой C++20 `operator<=>` и `std::hash`.
+- `src/demo.cpp` — главное сквозное демо («До и После»):
+  1. Primitive Obsession и ловушка неявного приведения (`silent overload hijacking`).
+  2. Защищённый API на `TypeWrapper` и пользовательские литералы (`_m`, `_s`).
+  3. Разграничение систем координат (`ScreenRect` vs `ClientRect`) и совместимость с STL (`std::unordered_set`).
+- `src/alternatives.cpp` — разбор альтернативных подходов:
+  1. Parameter Object и Designated Initializers (C++20) для конфигураций.
+  2. `enum class` как легковесный сильный тип и границы его применимости.
 
-## 📦 Структура проекта
+## Сборка и запуск
 
-```text
-strong-types-examples/
-├── CMakeLists.txt
-├── README.md
-└── src/
-    ├── 01_speed_evolution.cpp
-    ├── 02_logic_and_price.cpp
-    ├── 03_type_wrapper.cpp
-    ├── 04_discount_features.cpp
-    ├── 05_modern_cpp_features.cpp
-    └── 06_parameter_object.cpp
-```
-
-Все примеры используют стандарт C++20.
-
----
-
-## 🔧 Требования
-
-- CMake 3.10+
-- Компилятор с поддержкой C++20 (GCC 10+, Clang 10+, MSVC 2019+)
-- Windows / Linux / macOS
-
----
-
-## 🚀 Быстрый старт
-
-### Сборка (MinGW / Ninja / Makefiles)
+Сборка из текущего каталога:
 
 ```bash
-cmake -S . -B build -G "MinGW Makefiles"
+cmake -B build
 cmake --build build
+ctest --test-dir build --output-on-failure
 ```
 
-### Windows (Visual Studio)
-
+Для Visual Studio:
 ```powershell
-cmake -S . -B build
+cmake -B build
 cmake --build build --config Debug
+ctest --test-dir build -C Debug --output-on-failure
 ```
-
----
-
-## ▶️ Запуск всех примеров (CTest)
-
-Все примеры зарегистрированы как тесты. Перейдите в каталог сборки:
-
-```bash
-cd build
-ctest --output-on-failure
-```
-
-*Примечание: для Visual Studio добавьте `-C Debug` к команде ctest.*
-
----
-
-## 📘 Что содержится в примерах
-
-**01.** `01_speed_evolution.cpp`  
-Эволюция функции скорости: от «голых» примитивов к защите через сильные типы.
-
-**02.** `02_logic_and_price.cpp`  
-Защита логики: использование `explicit` операторов и перегрузка операторов `+`/`-` для доменных типов.
-
-**03.** `03_type_wrapper.cpp`  
-Шаблонная обёртка `TypeWrapper<T, Tag>`: универсальный каркас, генерация операторов сравнения (`operator<=>`) и интеграция со `std::hash`.
-
-**04.** `04_discount_features.cpp`  
-Смысловая перегрузка: разделение логики скидок (проценты vs рубли) и гибкий порядок параметров.
-
-**05.** `05_modern_cpp_features.cpp`  
-Современные возможности: User-Defined Literals (`_m`) для лаконичности кода.
-
-**06.** `06_parameter_object.cpp`  
-Паттерн Parameter Object через агрегаты C++20 (Designated Initializers): прагматичный компромисс для функций с большим количеством параметров.
-
----
-
-## 🙌 Обратная связь
-
-Нашли ошибку? Хотите предложить улучшение?
-Открывайте PR или пишите в комментариях к статье на Хабре.

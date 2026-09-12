@@ -1,8 +1,10 @@
-# Првило: игнорируем всё, что создает CMake и IDE
+# Build artifacts
 build/
 bin/
 lib/
 out/
+
+# IDE / Editor artifacts
 .vs/
 .vscode/
 *.user
@@ -10,6 +12,8 @@ out/
 *.sln
 *.vcxproj
 *.filters
+
+# CMake generated files
 CMakeCache.txt
 CMakeFiles/
 CMakeSettings.json
